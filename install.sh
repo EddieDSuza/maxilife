@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # system upgrade 
+sudo apt-get update && sudo apt-get upgrade 
+sudo rpi-update
 
-sudo apt-get update && sudo apt-get upgrade
+# Argon Fan Script
+curl https://download.argon40.com/argon1.sh | bash
 
 # docker install
-
 curl -fsSL https://get.docker.com -o get-docker.sh
-
 sudo sh get-docker.sh
-
 sudo usermod -aG docker pi
 
 # portainer install
-
 sudo docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 
 # watch tower install
@@ -40,3 +39,5 @@ sudo docker run -d \
   -v omada-work:/opt/tplink/EAPController/work \
   -v omada-logs:/opt/tplink/EAPController/logs \
   mbentley/omada-controller:latest
+
+
