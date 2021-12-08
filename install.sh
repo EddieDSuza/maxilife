@@ -40,4 +40,6 @@ sudo docker run -d \
   -v omada-logs:/opt/tplink/EAPController/logs \
   mbentley/omada-controller:latest
 
-
+# mqtt install
+sudo apt-get install mosquitto -y
+sudo apt-get install mosquitto-clients
