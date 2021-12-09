@@ -11,6 +11,9 @@ yes | sudo apt full-upgrade
 yes | sudo sudo rpi-update
 
 # Argon One setup
+echo "***************"
+echo "Argon One Setuo"
+echo "***************"
 curl https://download.argon40.com/argon1.sh | bash 
 
 # Docker setup
