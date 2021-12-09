@@ -6,39 +6,54 @@ echo "Setting Up Maxilife Hub W/ Zigbee - Ver 1.0"
 echo "*******************************************"
 
 # System Upgrade
+echo "**************"
+echo "System Upgrade"
+echo "**************"
 yes | sudo apt-get install
 yes | sudo apt full-upgrade
 yes | sudo sudo rpi-update
+echo "************************"
+echo "System Upgrade Completed"
+echo "************************"
 
 # Argon One setup
 echo "***************"
-echo "Argon One Setuo"
+echo "Argon One Setup"
 echo "***************"
 curl https://download.argon40.com/argon1.sh | bash 
 
 # Docker setup
 echo "*************"
-echo "Docker Setuo"
+echo "Docker Setup"
 echo "*************"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker pi
+echo "**********************"
+echo "Docker Setup Completed"
+echo "**********************"
 
 # Portainer setup
 echo "***************"
-echo "Portainer Setuo"
+echo "Portainer Setup"
 echo "***************"
 sudo docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+echo "*************************"
+echo "Portainer Setup Completed"
+echo "*************************"
 
 # Watch Tower setup
 echo "*****************"
-echo "Watch Tower Setuo"
+echo "Watch Tower Setup"
 echo "*****************"
 sudo docker run --name="watchtower" -d --restart=always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
+echo "***************************"
+echo "Watch Tower Setup Completed"
+echo "***************************"
 
 # Omada setup
 echo "*************"
-echo "Tp-Link Setuo"
+echo "Tp-Link Setup"
 echo "*************"
 sudo docker volume create omada-data
 sudo docker volume create omada-work
@@ -61,10 +76,13 @@ sudo docker run -d \
   -v omada-work:/opt/tplink/EAPController/work \
   -v omada-logs:/opt/tplink/EAPController/logs \
   mbentley/omada-controller:latest
-  
+echo "***********************"
+echo "Tp-Link Setup Completed"
+echo "***********************"
+
 # Z2M setup
 echo "*****************"
-echo "Zigbee2MQTT Setuo"
+echo "Zigbee2MQTT Setup"
 echo "*****************"
 wget https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/data/configuration.yaml -P data
 
@@ -76,13 +94,19 @@ sudo docker run \
    -v /run/udev:/run/udev:ro \
    -e TZ=Europe/Amsterdam \
    koenkk/zigbee2mqtt
+echo "***************************"
+echo "Zigbee2MQTT Setup Completed"
+echo "***************************"
 
 # MQTT Install
 echo "***********"
-echo "MQTT Setuo"
+echo "MQTT Setup"
 echo "***********"
 sudo apt-get install mosquitto -y
 sudo apt-get install mosquitto-clients
+echo "********************"
+echo "MQTT Setup Completed"
+echo "********************"
 
 # Node Install
 echo "************"
