@@ -1,13 +1,16 @@
 #!/bin/bash
 
+
+# System Upgrade
+yes | sudo apt-get install && sudo apt full-upgradedo 
+yes | sudo sudo rpi-update
+
 # Argon One setup
 curl https://download.argon40.com/argon1.sh | bash 
 
 # Docker setup
 curl -fsSL https://get.docker.com -o get-docker.sh
-
 sudo sh get-docker.sh
-
 sudo usermod -aG docker pi
 
 # Portainer setup
@@ -54,6 +57,9 @@ sudo docker run \
 # MQTT Install
 sudo apt-get install mosquitto -y
 sudo apt-get install mosquitto-clients
+
+# Node Install
+yes | sudo hb-service update-node
 
 echo "***************************"
 echo "ALL PACKAGES INSTALLED"
