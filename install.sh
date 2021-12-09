@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Welcome Message
+
+echo "Setting Up Maxilife Hub - Ver 1.0"
 
 # System Upgrade
 yes | sudo apt-get install && sudo apt full-upgradedo 
