@@ -9,9 +9,9 @@ echo "*******************************************"
 echo "**************"
 echo "System Upgrade"
 echo "**************"
-yes | sudo apt-get install
-yes | sudo apt full-upgrade
-yes | sudo rpi-update
+yes|sudo apt-get install
+yes|sudo apt full-upgrade
+yes|sudo rpi-update
 echo "************************"
 echo "System Upgrade Completed"
 echo "************************"
