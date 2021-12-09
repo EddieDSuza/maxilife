@@ -104,6 +104,7 @@ echo "MQTT Setup"
 echo "***********"
 sudo apt-get install mosquitto -y
 sudo apt-get install mosquitto-clients
+sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /etc/mosquitto/
 echo "********************"
 echo "MQTT Setup Completed"
 echo "********************"
