@@ -54,3 +54,7 @@ sudo docker run \
 # MQTT Install
 sudo apt-get install mosquitto -y
 sudo apt-get install mosquitto-clients
+
+echo "***************************"
+echo "ALL PACKAGES INSTALLED"
+echo "***************************"
