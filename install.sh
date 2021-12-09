@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# system upgrade 
-sudo apt-get install mosquitto -y
-sudo apt-get install mosquitto-clients
-
 # Docker CE for Linux installation script
 #
 # See https://docs.docker.com/engine/install/ for the installation steps.
