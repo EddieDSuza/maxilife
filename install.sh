@@ -6,26 +6,26 @@ echo "Setting Up Maxilife Hub W/ Zigbee - Ver 1.0"
 echo "*******************************************"
 
 # System Upgrade
-echo "**************"
-echo "System Upgrade"
-echo "**************"
-yes|sudo apt-get install
-yes|sudo apt full-upgrade
-yes|sudo rpi-update
+echo "***********************"
+echo "Commence System Upgrade"
+echo "***********************"
+sudo apt -y update
+sudo apt -y upgrade
+sudo rpi-eeprom-update -d -a
 echo "************************"
 echo "System Upgrade Completed"
 echo "************************"
 
 # Argon One setup
-echo "***************"
-echo "Argon One Setup"
-echo "***************"
+echo "************************"
+echo "Commence Argon One Setup"
+echo "************************"
 curl https://download.argon40.com/argon1.sh | bash 
 
 # Docker setup
-echo "*************"
-echo "Docker Setup"
-echo "*************"
+echo "*********************"
+echo "Commence Docker Setup"
+echo "*********************"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker pi
@@ -34,27 +34,27 @@ echo "Docker Setup Completed"
 echo "**********************"
 
 # Portainer setup
-echo "***************"
-echo "Portainer Setup"
-echo "***************"
+echo "************************"
+echo "Commence Portainer Setup"
+echo "************************"
 sudo docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 echo "*************************"
 echo "Portainer Setup Completed"
 echo "*************************"
 
 # Watch Tower setup
-echo "*****************"
-echo "Watch Tower Setup"
-echo "*****************"
+echo "**************************"
+echo "Commence Watch Tower Setup"
+echo "**************************"
 sudo docker run --name="watchtower" -d --restart=always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
 echo "***************************"
 echo "Watch Tower Setup Completed"
 echo "***************************"
 
 # Omada setup
-echo "*************"
-echo "Tp-Link Setup"
-echo "*************"
+echo "**********************"
+echo "Commence Tp-Link Setup"
+echo "**********************"
 sudo docker volume create omada-data
 sudo docker volume create omada-work
 sudo docker volume create omada-logs
@@ -80,10 +80,21 @@ echo "***********************"
 echo "Tp-Link Setup Completed"
 echo "***********************"
 
+# MQTT Install
+echo "*******************"
+echo "Commence MQTT Setup"
+echo "*******************"
+sudo apt-get install mosquitto -y
+sudo apt-get install mosquitto-clients
+sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /etc/mosquitto/
+echo "********************"
+echo "MQTT Setup Completed"
+echo "********************"
+
 # Z2M setup
-echo "*****************"
-echo "Zigbee2MQTT Setup"
-echo "*****************"
+echo "**************************"
+echo "Commence Zigbee2MQTT Setup"
+echo "**************************"
 wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/configuration.yaml -P data
 
 sudo docker run \
@@ -98,21 +109,10 @@ echo "***************************"
 echo "Zigbee2MQTT Setup Completed"
 echo "***************************"
 
-# MQTT Install
-echo "***********"
-echo "MQTT Setup"
-echo "***********"
-sudo apt-get install mosquitto -y
-sudo apt-get install mosquitto-clients
-sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /etc/mosquitto/
-echo "********************"
-echo "MQTT Setup Completed"
-echo "********************"
-
 # Node Install
-echo "************"
-echo "Node Upgrade"
-echo "************"
+echo "*********************"
+echo "Commence Node Upgrade"
+echo "*********************"
 yes | sudo hb-service update-node
 
 echo "*************************************"
