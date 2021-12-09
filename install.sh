@@ -84,7 +84,7 @@ echo "***********************"
 echo "*****************"
 echo "Zigbee2MQTT Setup"
 echo "*****************"
-wget https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/data/configuration.yaml -P data
+wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/configuration.yaml -P data
 
 sudo docker run \
    --name zigbee2mqtt \
