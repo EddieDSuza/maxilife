@@ -1,16 +1,22 @@
 #!/bin/bash
 
+# Argon One setup
 curl https://download.argon40.com/argon1.sh | bash 
+
+# Docker setup
 curl -fsSL https://get.docker.com -o get-docker.sh
 
 sudo sh get-docker.sh
 
 sudo usermod -aG docker pi
 
+# Portainer setup
 sudo docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 
+# Watch Tower setup
 sudo docker run --name="watchtower" -d --restart=always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
 
+# Omada setup
 sudo docker volume create omada-data
 sudo docker volume create omada-work
 sudo docker volume create omada-logs
@@ -32,3 +38,25 @@ sudo docker run -d \
   -v omada-work:/opt/tplink/EAPController/work \
   -v omada-logs:/opt/tplink/EAPController/logs \
   mbentley/omada-controller:latest
+  
+# Z2M setup
+wget https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/data/configuration.yaml -P data
+
+sudo docker run \
+   --name zigbee2mqtt \
+   --device=/dev/ttyACM0 \
+   --net host \
+   -v $(pwd)/data:/app/data \
+   -v /run/udev:/run/udev:ro \
+   -e TZ=Europe/Amsterdam \
+   koenkk/zigbee2mqtt
+
+# MQTT Install
+sudo apt-get install mosquitto -y
+sudo apt-get install mosquitto-clients
+
+# remove files 
+sudo rm get-docker.sh
+
+# Reboot
+sudo reboot
