@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Welcome Message
-
+echo "**********************************"
 echo "Setting Up Maxilife Hub - Ver 1.0"
+echo "**********************************"
 
 # System Upgrade
-yes | sudo apt-get install && sudo apt full-upgradedo 
+yes | sudo apt-get install && sudo apt full-upgrade
 yes | sudo sudo rpi-update
 
 # Argon One setup
