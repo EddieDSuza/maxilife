@@ -64,6 +64,6 @@ sudo apt-get install mosquitto-clients
 # Node Install
 yes | sudo hb-service update-node
 
-echo "***************************"
+echo "*************************************"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
-echo "***************************"
+echo "*************************************"
