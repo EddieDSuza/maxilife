@@ -1,5 +1,0 @@
-#!/bin/bash
-
-yes | sudo apt-get install && sudo apt full-upgrade
-yes | sudo sudo rpi-update
-yes | sudo hb-service update-node
