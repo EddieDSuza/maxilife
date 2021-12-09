@@ -11,7 +11,7 @@ echo "System Upgrade"
 echo "**************"
 yes | sudo apt-get install
 yes | sudo apt full-upgrade
-yes | sudo sudo rpi-update
+yes | sudo rpi-update
 echo "************************"
 echo "System Upgrade Completed"
 echo "************************"
