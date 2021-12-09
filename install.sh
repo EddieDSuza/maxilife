@@ -93,3 +93,5 @@ yes | sudo hb-service update-node
 echo "*************************************"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
 echo "*************************************"
+
+sudo reboot
