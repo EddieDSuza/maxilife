@@ -85,7 +85,7 @@ echo "*******************"
 echo "Commence MQTT Setup"
 echo "*******************"
 sudo apt-get install mosquitto -y
-sudo apt-get install mosquitto-clients
+sudo apt-get install mosquitto-clients -y
 sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /etc/mosquitto/
 echo "********************"
 echo "MQTT Setup Completed"
@@ -103,7 +103,7 @@ sudo docker run \
    --net host \
    -v $(pwd)/data:/app/data \
    -v /run/udev:/run/udev:ro \
-   -e TZ=Europe/Amsterdam \
+   -e TZ=Asia/Dubai \
    koenkk/zigbee2mqtt
 echo "***************************"
 echo "Zigbee2MQTT Setup Completed"
