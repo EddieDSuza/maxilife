@@ -7,5 +7,3 @@ echo "*******************************************"
 
 if [ls -l /dev/ttyACM0 = /dev/ttyACM0]
   echo "Device is connected"
-else
-  echo "Device is Not connected"
