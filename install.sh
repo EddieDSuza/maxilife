@@ -103,6 +103,7 @@ sudo docker run \
    --name zigbee2mqtt \
    --device=/dev/ttyACM0 \
    --net host \
+   --restart always \
    -v $(pwd)/data:/app/data \
    -v /run/udev:/run/udev:ro \
    -e TZ=Asia/Dubai \
@@ -110,12 +111,6 @@ sudo docker run \
 echo "***************************"
 echo "Zigbee2MQTT Setup Completed"
 echo "***************************"
-
-# Node Install
-echo "****************************************"
-echo "Commence Node Upgrade & Start Containers"
-echo "****************************************"
-yes | sudo hb-service update-node
 
 echo "*************************************"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
