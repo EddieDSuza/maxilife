@@ -11,8 +11,8 @@ mqtt:
   # MQTT server URL
   server: 'mqtt://192.168.86.2:1883'
   # MQTT server authentication, uncomment if required:
-  user: admin
-  password: admin
+  # user: admin
+  # password: admin
 
 # Serial settings
 serial:
