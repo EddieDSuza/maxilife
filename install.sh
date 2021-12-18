@@ -118,7 +118,6 @@ echo "Commence Node Upgrade & Start Containers"
 echo "****************************************"
 yes | sudo hb-service update-node
 sudo docker start zigbee2mqtt
-sudo npm install homebridge-z2m
 
 echo "*************************************"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
