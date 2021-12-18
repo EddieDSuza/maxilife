@@ -87,7 +87,7 @@ echo "*******************"
 sudo mkdir mosquitto
 sudo mkdir mosquitto/config/
 sudo mkdir mosquitto/data/
-sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /mosquitto/config/
+sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /home/pi/mosquitto/config/
 sudo docker run -it --name MQTT --restart=always --net=host -tid -p 1883:1883 -v $(pwd)/mosquitto:/mosquitto/ eclipse-mosquitto
 echo "********************"
 echo "MQTT Setup Completed"
