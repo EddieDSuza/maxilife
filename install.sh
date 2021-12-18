@@ -84,9 +84,11 @@ echo "***********************"
 echo "*******************"
 echo "Commence MQTT Setup"
 echo "*******************"
-sudo apt-get install mosquitto -y
-sudo apt-get install mosquitto-clients -y
-sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /etc/mosquitto/
+sudo mkdir mosquitto
+sudo mkdir mosquitto/config/
+sudo mkdir mosquitto/data/
+sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /mosquitto/config/
+sudo docker run -it --name MQTT --restart=always --net=host -tid -p 1883:1883 -v $(pwd)/mosquitto:/mosquitto/ eclipse-mosquitto
 echo "********************"
 echo "MQTT Setup Completed"
 echo "********************"
@@ -114,6 +116,7 @@ echo "*********************"
 echo "Commence Node Upgrade"
 echo "*********************"
 yes | sudo hb-service update-node
+sudo docker start zigbee2mqtt
 
 echo "*************************************"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
