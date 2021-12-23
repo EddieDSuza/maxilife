@@ -1,60 +1,91 @@
 #!/bin/bash
 
-# Welcome Message
-echo "*******************************************"
-echo "Setting Up Maxilife Hub W/ Zigbee - Ver 1.0"
-echo "*******************************************"
-
+##################################################################################################
+# maxilife argon one hub                                                                         #
+# Copyright (C) 2021 MAXILIFE                                                                    #
+#                                                                                                #
+# This program is free software: you can redistribute it and/or modify                           #
+# it under the terms of the GNU General Public License as published by                           #
+# the Free Software Foundation, either version 3 of the License, or                              #
+# (at your option) any later version.                                                            #
+#                                                                                                #
+# This program is distributed in the hope that it will be useful,                                #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of                                 #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                  #
+# GNU General Public License for more details.                                                   #
+#                                                                                                #
+# You should have received a copy of the GNU General Public License                              #
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.                          #
+##################################################################################################
+echo " "
+echo " "
+echo " "
+echo "----------------------------------------------------------------"
+echo "Setting Up Maxilife Hub W/ Zigbee ConbeeII - Ver 1.0"
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # System Upgrade
-echo "***********************"
+echo "----------------------------------------------------------------"
 echo "Commence System Upgrade"
-echo "***********************"
+echo "----------------------------------------------------------------"
 sudo apt -y update
 sudo apt -y upgrade
 sudo rpi-eeprom-update -d -a
-echo "************************"
+echo "----------------------------------------------------------------"
 echo "System Upgrade Completed"
-echo "************************"
-
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # Argon One setup
-echo "************************"
+echo "----------------------------------------------------------------"
 echo "Commence Argon One Setup"
-echo "************************"
+echo "----------------------------------------------------------------"
 curl https://download.argon40.com/argon1.sh | bash 
-
+echo " "
+echo " "
+echo " "
 # Docker setup
-echo "*********************"
+echo "----------------------------------------------------------------"
 echo "Commence Docker Setup"
-echo "*********************"
+echo "----------------------------------------------------------------"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker pi
-echo "**********************"
+echo "----------------------------------------------------------------"
 echo "Docker Setup Completed"
-echo "**********************"
-
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # Portainer setup
-echo "************************"
+echo "----------------------------------------------------------------"
 echo "Commence Portainer Setup"
-echo "************************"
+echo "----------------------------------------------------------------"
 sudo docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-echo "*************************"
-echo "Portainer Setup Completed"
-echo "*************************"
-
+echo "----------------------------------------------------------------"
+echo "Portainer Interface is reachable at homebridge.local:9000"
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # Watch Tower setup
-echo "**************************"
+echo "----------------------------------------------------------------"
 echo "Commence Watch Tower Setup"
-echo "**************************"
+echo "----------------------------------------------------------------"
 sudo docker run --name="watchtower" -d --restart=always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
-echo "***************************"
+echo "----------------------------------------------------------------"
 echo "Watch Tower Setup Completed"
-echo "***************************"
-
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # Omada setup
-echo "**********************"
+echo "----------------------------------------------------------------"
 echo "Commence Tp-Link Setup"
-echo "**********************"
+echo "----------------------------------------------------------------"
 sudo docker volume create omada-data
 sudo docker volume create omada-work
 sudo docker volume create omada-logs
@@ -76,27 +107,31 @@ sudo docker run -d \
   -v omada-work:/opt/tplink/EAPController/work \
   -v omada-logs:/opt/tplink/EAPController/logs \
   mbentley/omada-controller:latest
-echo "***********************"
-echo "Tp-Link Setup Completed"
-echo "***********************"
-
+echo "----------------------------------------------------------------"
+echo "Omada Interface is reachable at homebridge.local:8088"
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # MQTT Install
-echo "*******************"
+echo "----------------------------------------------------------------"
 echo "Commence MQTT Setup"
-echo "*******************"
+echo "----------------------------------------------------------------"
 sudo mkdir mosquitto
 sudo mkdir mosquitto/config/
 sudo mkdir mosquitto/data/
 sudo wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/mosquitto.conf -P /home/pi/mosquitto/config/
 sudo docker run -it --name MQTT --restart=always --net=host -tid -p 1883:1883 -v $(pwd)/mosquitto:/mosquitto/ eclipse-mosquitto
-echo "********************"
+echo "----------------------------------------------------------------"
 echo "MQTT Setup Completed"
-echo "********************"
-
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
 # Z2M setup
-echo "**************************"
+echo "----------------------------------------------------------------"
 echo "Commence Zigbee2MQTT Setup"
-echo "**************************"
+echo "----------------------------------------------------------------"
 wget https://raw.githubusercontent.com/EddieDSuza/maxilife/main/configuration.yaml -P data
 
 sudo docker run \
@@ -108,12 +143,17 @@ sudo docker run \
    -v /run/udev:/run/udev:ro \
    -e TZ=Asia/Dubai \
    koenkk/zigbee2mqtt
-echo "***************************"
-echo "Zigbee2MQTT Setup Completed"
-echo "***************************"
-
-echo "*************************************"
+echo "----------------------------------------------------------------"
+echo "Z2M Interface is reachable at homebridge.local:8081"
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
+echo "----------------------------------------------------------------"
 echo "ALL PACKAGES INSTALLED WITH NO ERRORS"
-echo "*************************************"
-
+echo "----------------------------------------------------------------"
+echo " "
+echo " "
+echo " "
+echo "Rebooting Now"
 sudo reboot
