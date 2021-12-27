@@ -1,4 +1,14 @@
-{
+const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
+const tz = require('zigbee-herdsman-converters/converters/toZigbee');
+const exposes = require('zigbee-herdsman-converters/lib/exposes');
+const reporting = require('zigbee-herdsman-converters/lib/reporting');
+const extend = require('zigbee-herdsman-converters/lib/extend');
+const e = exposes.presets;
+const ea = exposes.access;
+const tuya = require("zigbee-herdsman-converters/lib/tuya");
+
+const definition = {
+        {
         fingerprint: [{modelID: 'TS0601', manufacturerName: '_TZE200_wv90ladg'}],
         model: 'HT-09',
         vendor: 'ETOP',
@@ -18,4 +28,7 @@
             .withLocalTemperature(ea.STATE)
             .withSystemMode(['off', 'heat', 'auto'], ea.STATE_SET).withRunningState(['idle', 'heat'], ea.STATE)
             .withAwayMode()],
-    }
+        }   
+};
+
+module.exports = definition;
