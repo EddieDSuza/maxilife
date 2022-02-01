@@ -1,12 +1,34 @@
-const exposes = require('../lib/exposes');
-const fz = {...require('../converters/fromZigbee'), legacy: require('../lib/legacy').fromZigbee};
-const tz = require('../converters/toZigbee');
-const ota = require('../lib/ota');
-const tuya = require('../lib/tuya');
-const reporting = require('../lib/reporting');
-const extend = require('../lib/extend');
+const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
+const tz = require('zigbee-herdsman-converters/converters/toZigbee');
+const exposes = require('zigbee-herdsman-converters/lib/exposes');
+const reporting = require('zigbee-herdsman-converters/lib/reporting');
+const extend = require('zigbee-herdsman-converters/lib/extend');
 const e = exposes.presets;
 const ea = exposes.access;
+
+const devices = [
+    {
+    fingerprint: [
+            {type: 'EndDevice', manufacturerID: 4098},
+            {manufacturerName: '_TZ3000_6uzkisv2'},
+        ],
+        //zigbeeModel: ['TS0201'],
+        model: 'TS0201',
+        vendor: 'PCBLab',
+        description: 'Temperature & humidity sensor without display',
+        fromZigbee: [fz.battery, fz.temperature, fz.humidity],
+        toZigbee: [],
+        exposes: [e.battery(), e.temperature(), e.humidity()],
+        configure: async (device, coordinatorEndpoint, logger) => {
+            const endpoint = device.getEndpoint(1);
+            await reporting.bind(endpoint, coordinatorEndpoint, ['msTemperatureMeasurement']);
+            await reporting.temperature(endpoint);
+        },
+    },
+];
+module.exports = devices;
+
+
 
 const definition = {
     zigbeeModel: [modelID: 'TS0601', manufacturerName: '_TZE200_ispx2ewo'],
