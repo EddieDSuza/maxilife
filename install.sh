@@ -142,7 +142,7 @@ sudo docker run \
    -v $(pwd)/data:/app/data \
    -v /run/udev:/run/udev:ro \
    -e TZ=Asia/Dubai \
-   koenkk/zigbee2mqtt
+   koenkk/zigbee2mqtt:latest-dev
 echo "----------------------------------------------------------------"
 echo "Z2M Interface is reachable at homebridge.local:8081"
 echo "----------------------------------------------------------------"
